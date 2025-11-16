@@ -2356,24 +2356,29 @@ class FormController extends ChangeNotifier {
         : FormValidationMode.changed;
     _attachedInputs[key] = state;
     // validate
-    var future = validator?.validate(context, value, lifecycle);
-    if (future is Future<ValidationResult?>) {
-      _validity[key] = _ValidatorResultStash(future, lifecycle);
-      future.then((value) {
-        // resolve the future and store synchronous value
-        if (_validity[key]?.result == future) {
-          _validity[key] = _ValidatorResultStash(value?.attach(key), lifecycle);
-          WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-            if (_disposed) {
-              return;
-            }
-            notifyListeners();
-          });
-        }
-      });
-    } else {
-      _validity[key] = _ValidatorResultStash(future, lifecycle);
+
+    if (lifecycle != FormValidationMode.initial) {
+      var future = validator?.validate(context, value, lifecycle);
+      if (future is Future<ValidationResult?>) {
+        _validity[key] = _ValidatorResultStash(future, lifecycle);
+        future.then((value) {
+          // resolve the future and store synchronous value
+          if (_validity[key]?.result == future) {
+            _validity[key] =
+                _ValidatorResultStash(value?.attach(key), lifecycle);
+            WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+              if (_disposed) {
+                return;
+              }
+              notifyListeners();
+            });
+          }
+        });
+      } else {
+        _validity[key] = _ValidatorResultStash(future, lifecycle);
+      }
     }
+
     // check for revalidation
     Map<FormKey, FutureOr<ValidationResult?>> revalidate = {};
     for (var entry in _attachedInputs.entries) {
