@@ -1,11 +1,11 @@
 const words = [
-    'Something is happening. Please wait.',
-    'Please be patient. This may take a while.',
-    'While you wait, please consider that this is a good time to take a break.',
-    'Please wait. This is a good time to go grab a cup of coffee.',
-    'Sometimes the things that are worth waiting for take time.',
-    'Please wait. This is a good time to stretch your legs.',
-    'Posture check! Please wait while we load the application.',
+    'Quelque chose se passe. Veuillez patienter.',
+    'Veuillez patienter. Cela peut prendre un certain temps.',
+    'Pendant que vous attendez, veuillez considérer que c\'est un bon moment pour faire une pause.',
+    'Veuillez patienter. C\'est le bon moment pour aller prendre une tasse de café.',
+    'Parfois, les choses qui valent la peine d\'attendre prennent du temps.',
+    'Veuillez patienter. C\'est le bon moment pour vous dégourdir les jambes.',
+    'Vérification de la posture ! Veuillez patienter pendant que nous chargeons l\'application.',
 ];
 
 const loaderWidget = `
