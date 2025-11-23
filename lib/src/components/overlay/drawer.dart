@@ -285,6 +285,7 @@ DrawerOverlayCompleter<T?> openSheetOverlay<T>({
   WidgetBuilder? backdropBuilder,
   Color? barrierColor,
   bool draggable = false,
+  bool expands = true,
   AnimationController? animationController,
   bool autoOpen = true,
   BoxConstraints? constraints,
@@ -305,7 +306,7 @@ DrawerOverlayCompleter<T?> openSheetOverlay<T>({
     builder: (context, extraSize, size, padding, stackIndex) {
       return SheetWrapper(
         position: position,
-        expands: true,
+        expands: expands,
         draggable: draggable,
         extraSize: extraSize,
         size: size,
@@ -403,6 +404,7 @@ Future<T?> openSheet<T>({
   bool transformBackdrop = false,
   Color? barrierColor,
   bool draggable = false,
+  bool expands = true,
   AnimationController? animationController,
   WidgetBuilder? backdropBuilder,
   BoxConstraints? constraints,
@@ -416,6 +418,7 @@ Future<T?> openSheet<T>({
     transformBackdrop: transformBackdrop,
     barrierColor: barrierColor,
     draggable: draggable,
+    expands: expands,
     animationController: animationController,
     backdropBuilder: backdropBuilder,
     constraints: constraints,
