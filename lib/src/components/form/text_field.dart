@@ -2045,6 +2045,7 @@ class TextFieldState extends State<TextField>
     _effectiveFocusNode.removeListener(_handleFocusChanged);
     _focusNode?.dispose();
     _controller?.dispose();
+    widget.controller?.removeListener(_handleControllerChanged);
     super.dispose();
   }
 

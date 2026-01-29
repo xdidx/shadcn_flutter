@@ -1827,6 +1827,9 @@ class FormEntryState extends State<FormEntry> with FormFieldHandle {
 
   @override
   FutureOr<ValidationResult?> reportNewFormValue<T>(T? value) {
+    if (!mounted) {
+      return null;
+    }
     bool isSameType = widget.key.type == T;
     if (!isSameType) {
       var parentLookup = Data.maybeFind<FormFieldHandle>(context);
@@ -1843,6 +1846,9 @@ class FormEntryState extends State<FormEntry> with FormFieldHandle {
 
   @override
   FutureOr<ValidationResult?> revalidate() {
+    if (!mounted) {
+      return null;
+    }
     return _controller?.attach(
         context, this, _cachedValue, widget.validator, true);
   }
@@ -2720,8 +2726,11 @@ mixin FormValueSupplier<T, X extends StatefulWidget> on State<X> {
   void didReplaceFormValue(T value);
 
   void _reportNewFormValue(T? value) {
+    if (!mounted) {
+      return;
+    }
     var state = _entryState;
-    if (state == null) {
+    if (state == null || !state.mounted) {
       return;
     }
     final currentCounter = ++_futureCounter;
@@ -2731,7 +2740,7 @@ mixin FormValueSupplier<T, X extends StatefulWidget> on State<X> {
         if (_futureCounter == currentCounter) {
           if (value is ReplaceResult<T>) {
             WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-              if (context.mounted) {
+              if (mounted) {
                 didReplaceFormValue(value.value);
               }
             });
@@ -2740,7 +2749,7 @@ mixin FormValueSupplier<T, X extends StatefulWidget> on State<X> {
       });
     } else if (validationResult is ReplaceResult<T>) {
       WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-        if (context.mounted) {
+        if (mounted) {
           didReplaceFormValue(validationResult.value);
         }
       });
