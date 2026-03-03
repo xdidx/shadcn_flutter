@@ -63,6 +63,9 @@ class NavigationBar extends StatefulWidget {
   /// Whether the navigation bar should expand to fill available space.
   final bool expanded;
 
+  /// Whether the navigation bar children should expand to fill available space.
+  final bool expandsChildren;
+
   /// Whether to maintain the cross-axis size based on intrinsic content size.
   final bool? keepCrossAxisSize;
 
@@ -94,6 +97,7 @@ class NavigationBar extends StatefulWidget {
     this.selectedKey,
     this.onSelected,
     this.expanded = false,
+    this.expandsChildren = false,
     this.keepCrossAxisSize,
     this.keepMainAxisSize,
     this.expandedSize,
@@ -164,7 +168,10 @@ class _NavigationBarState extends State<NavigationBar> {
                 direction: direction,
                 mainAxisAlignment: alignment.mainAxisAlignment,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: widget.children,
+                children: widget.children
+                    .map((child) =>
+                        widget.expandsChildren ? Expanded(child: child) : child)
+                    .toList(),
               ),
             ),
           ),
