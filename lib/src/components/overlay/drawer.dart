@@ -568,12 +568,13 @@ class _DrawerWrapperState extends State<DrawerWrapper>
   }
 
   Widget buildDraggableBar(ThemeData theme) {
+    final densityGap = theme.density.baseGap * theme.scaling;
     switch (resolvedPosition) {
       case OverlayPosition.left:
       case OverlayPosition.right:
         return Container(
-          width: widget.dragHandleSize?.width ?? 6 * theme.scaling,
-          height: widget.dragHandleSize?.height ?? 100 * theme.scaling,
+          width: widget.dragHandleSize?.width ?? densityGap * 0.75,
+          height: widget.dragHandleSize?.height ?? densityGap * 12.5,
           decoration: BoxDecoration(
             color: theme.colorScheme.muted,
             borderRadius: theme.borderRadiusXxl,
@@ -582,8 +583,8 @@ class _DrawerWrapperState extends State<DrawerWrapper>
       case OverlayPosition.top:
       case OverlayPosition.bottom:
         return Container(
-          width: widget.dragHandleSize?.width ?? 100 * theme.scaling,
-          height: widget.dragHandleSize?.height ?? 6 * theme.scaling,
+          width: widget.dragHandleSize?.width ?? densityGap * 12.5,
+          height: widget.dragHandleSize?.height ?? densityGap * 0.75,
           decoration: BoxDecoration(
             color: theme.colorScheme.muted,
             borderRadius: theme.borderRadiusXxl,
@@ -603,6 +604,7 @@ class _DrawerWrapperState extends State<DrawerWrapper>
 
   Widget buildDraggable(BuildContext context, ControlledAnimation? controlled,
       Widget child, ThemeData theme) {
+    final densityGap = theme.density.baseGap * theme.scaling;
     switch (resolvedPosition) {
       case OverlayPosition.left:
         return GestureDetector(
@@ -661,9 +663,9 @@ class _DrawerWrapperState extends State<DrawerWrapper>
                 ),
               ),
               if (widget.showDragHandle) ...[
-                Gap(widget.gapAfterDragger ?? 16 * theme.scaling),
+                Gap(widget.gapAfterDragger ?? densityGap * 2),
                 buildDraggableBar(theme),
-                Gap(widget.gapBeforeDragger ?? 12 * theme.scaling),
+                Gap(widget.gapBeforeDragger ?? densityGap * 1.5),
               ],
             ],
           ),
@@ -706,9 +708,9 @@ class _DrawerWrapperState extends State<DrawerWrapper>
             mainAxisSize: MainAxisSize.min,
             children: [
               if (widget.showDragHandle) ...[
-                Gap(widget.gapBeforeDragger ?? 12 * theme.scaling),
+                Gap(widget.gapBeforeDragger ?? densityGap * 1.5),
                 buildDraggableBar(theme),
-                Gap(widget.gapAfterDragger ?? 16 * theme.scaling),
+                Gap(widget.gapAfterDragger ?? densityGap * 2),
               ],
               Flexible(
                 child: AnimatedBuilder(
@@ -788,9 +790,9 @@ class _DrawerWrapperState extends State<DrawerWrapper>
                 ),
               ),
               if (widget.showDragHandle) ...[
-                Gap(widget.gapAfterDragger ?? 16 * theme.scaling),
+                Gap(widget.gapAfterDragger ?? densityGap * 2),
                 buildDraggableBar(theme),
-                Gap(widget.gapBeforeDragger ?? 12 * theme.scaling),
+                Gap(widget.gapBeforeDragger ?? densityGap * 1.5),
               ],
             ],
           ),
@@ -832,9 +834,9 @@ class _DrawerWrapperState extends State<DrawerWrapper>
             mainAxisSize: MainAxisSize.min,
             children: [
               if (widget.showDragHandle) ...[
-                Gap(widget.gapBeforeDragger ?? 12 * theme.scaling),
+                Gap(widget.gapBeforeDragger ?? densityGap * 1.5),
                 buildDraggableBar(theme),
-                Gap(widget.gapAfterDragger ?? 16 * theme.scaling),
+                Gap(widget.gapAfterDragger ?? densityGap * 2),
               ],
               Flexible(
                 child: AnimatedBuilder(
