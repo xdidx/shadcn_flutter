@@ -283,6 +283,9 @@ class DatePicker extends StatelessWidget {
   /// Whether the date picker is enabled.
   final bool? enabled;
 
+  /// The date picker density
+  final ButtonDensity density;
+
   /// Creates a date picker.
   const DatePicker({
     super.key,
@@ -298,6 +301,7 @@ class DatePicker extends StatelessWidget {
     this.initialViewType,
     this.stateBuilder,
     this.enabled,
+    this.density = ButtonDensity.iconComfortable,
   });
 
   @override
@@ -335,6 +339,7 @@ class DatePicker extends StatelessWidget {
       defaultValue: CalendarViewType.date,
     );
     return ObjectFormField(
+      density: density,
       dialogTitle: dialogTitle,
       enabled: enabled,
       popoverAlignment: resolvedAlignment,
